@@ -47,6 +47,7 @@ contract Ballot{
     function delegate(address to) public{
         Voter storage sender = voters[msg.sender];
         require(!sender.voted, "Already voted.");
+        require(sender.weight != 0, "Has no Right to vote");
         require(to != msg.sender, "Not allowed to deligate yourself");
 
         while(voters[to].delegate != address(0)){
